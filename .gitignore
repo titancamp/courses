@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/01 - ASP.NET and Microservices/DemoApp/.vs/DemoApp/v16
+/01 - ASP.NET and Microservices/DemoApp/.vs/DemoApp/DesignTimeBuild/.dtbcache.v2
+/03 - Lesson - Collections/.vs
