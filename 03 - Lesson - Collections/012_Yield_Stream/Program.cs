@@ -14,33 +14,28 @@ namespace _012_Yield_Stream
         {
             FileStream stream = new FileStream("test.txt", FileMode.Open, FileAccess.Read);
 
-            var aaaaa = Environment.NewLine;
-            var aa = stream.FirstLine().ToList();
-            string text = ToString(aa);
-            //foreach (byte item in stream.AsEnumerable())
-            //{
-            //    Console.Write((char)item);
-            //}
+            var allBytes1 = stream.AsEnumerable().ToArray();
+            var allBytes2 = File.ReadAllBytes("test.txt");
 
-            //foreach (var item in stream.Lines())
-            //{
-            //    Console.WriteLine(ToString(item));
-            //}
+            bool isTrue = Equals(allBytes1, allBytes2);
 
             stream.Dispose();
 
             Console.ReadLine();
         }
 
-        static string ToString(List<byte> source)
+        private static bool Equals(byte[] bytes1, byte[] bytes2)
         {
-            var builder = new StringBuilder(source.Count);
-            foreach (var item in source)
-            {
-                builder.Append((char)item);
-            }
-            return builder.ToString();
-        }
+            if (bytes1.Length != bytes2.Length)
+                return false;
 
+            for (int i = 0; i < bytes1.Length; i++)
+            {
+                if (bytes1[i] != bytes2[i])
+                    return false;
+            }
+
+            return true;
+        }
     }
 }
