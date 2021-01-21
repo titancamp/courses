@@ -7,7 +7,8 @@ namespace _011_Yield_DataRepository
 {
     public interface IDataRepository
     {
-        IEnumerable<TModel> ExecuteAsEnumerable<TModel>(string query, Func<IDataRecord, TModel> convertFunc) 
+        IEnumerable<TModel> ExecuteAsEnumerable<TModel>(string query, 
+            Func<IDataRecord, TModel> convertFunc) 
             where TModel : class, new();
     }
 
@@ -34,6 +35,22 @@ namespace _011_Yield_DataRepository
 
             while (reader.Read())
                 yield return mapper.Invoke(reader);
+
+            //TModel model;
+            //while (reader.Read())
+            //{
+            //    try
+            //    {
+            //        model = mapper.Invoke(reader);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        //log
+            //        continue;
+            //    }
+
+            //    yield return model;
+            //}
         }
     }
 }

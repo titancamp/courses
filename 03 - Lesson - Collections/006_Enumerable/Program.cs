@@ -8,8 +8,8 @@ namespace _006_Enumerable
         static void Main(string[] args)
         {
             int[] arr = { 10, 20, 1000, 40 };
-            var list = new List<int> { 10, 20, 1000, 40 };
-            var listNode = new ListNode { 10, 20, 1000, 40 };
+            var list = new List<int> { 10, 20, 2, 40 };
+            var listNode = new ListNode<int> { 10, 20, 1000, 40 };
 
             int sum1 = MyMath.Sum(arr);
             int sum2 = MyMath.Sum(list);
@@ -17,50 +17,53 @@ namespace _006_Enumerable
         }
     }
 
-    class ListNode : IEnumerable
+    class ListNode<T> : IEnumerable<T>
     {
-        public int value;
-        public ListNode next;
-        private ListNode _last;
+        public T value;
+        public ListNode<T> next;
+        private ListNode<T> _last;
 
-        public ListNode Add(int item)
+        public ListNode<T> Add(T item)
         {
             if (_last == null)
             {
-                next = new ListNode { value = item };
+                next = new ListNode<T> { value = item };
                 _last = next;
             }
             else
             {
-                _last.next = new ListNode { value = item };
+                _last.next = new ListNode<T> { value = item };
                 _last = _last.next;
             }
 
             return _last;
         }
 
-        public override string ToString() => $"{value}, next: {next?.value}";
+        public override string ToString() => $"{value}, next: {next.value}";
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             return new Enumerator(this);
         }
 
-        private class Enumerator : IEnumerator
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        private class Enumerator : IEnumerator<T>
         {
-            public Enumerator(ListNode root)
+            public Enumerator(ListNode<T> root)
             {
                 _node = root;
             }
 
-            public object Current { get; private set; }
-            private ListNode _node;
+            public T Current { get; private set; }
+            object IEnumerator.Current => Current;
+            private ListNode<T> _node;
 
             public bool MoveNext()
             {
                 if (_node == null)
                     return false;
-                _node = null;
+
                 Current = _node.value;
                 _node = _node.next;
                 return true;
@@ -70,6 +73,8 @@ namespace _006_Enumerable
             {
                 _node = null;
             }
+
+            public void Dispose() => Reset();
         }
     }
 }

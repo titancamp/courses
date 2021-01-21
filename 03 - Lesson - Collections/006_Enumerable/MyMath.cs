@@ -1,10 +1,11 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace _006_Enumerable
 {
     static class MyMath
     {
-        public static int Sum(IEnumerable source)
+        public static int Sum(IEnumerable<int> source)
         {
             int sum = 0;
             foreach (int item in source)

@@ -8,10 +8,9 @@ namespace _005_Enumerable
         static void Main(string[] args)
         {
             //ListNode rootNode = new ListNode { value = 10 };
-            //rootNode
-            //    .Add(20)
-            //    .Add(30)
-            //    .Add(40);
+            //rootNode.Add(20);
+            //rootNode.Add(30);
+            //rootNode.Add(40);
 
             ListNode rootNode = new ListNode { 10, 20, 30, 40 };
 
