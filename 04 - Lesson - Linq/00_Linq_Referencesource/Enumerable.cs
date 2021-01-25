@@ -3,13 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 
-// Include Silverlight's managed resources
-#if SILVERLIGHT
-using System.Core;
-#endif //SILVERLIGHT
-
 namespace _00_Linq_Referencesource
 {
+    //http://referencesource.microsoft.com/
+    //https://github.com/microsoft/referencesource/blob/master/System.Core/System/Linq/Enumerable.cs
     public static partial class Enumerable
     {
         public static IEnumerable<TSource> Where<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
