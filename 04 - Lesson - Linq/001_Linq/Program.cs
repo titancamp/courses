@@ -9,17 +9,8 @@ namespace _001_Linq
         static void Main(string[] args)
         {
             var studens = GenerateStudentsData(10).ToList();
-        }
-
-        static List<Student> Find(IEnumerable<Student> source, University university)
-        {
-            var list = new List<Student>();
-            foreach (var item in source)
-            {
-                if (item.university == university)
-                    list.Add(item);
-            }
-            return list;
+            var res1 = studens.MyFind(p => p.age > 20);
+            var res2 = studens.MyTake(20).ToList();
         }
 
         static IEnumerable<Student> GenerateStudentsData(int count)
@@ -36,6 +27,54 @@ namespace _001_Linq
                     university = (University)rnd.Next(1, 4)
                 };
             }
+        }
+    }
+
+    internal static class Ex
+    {
+        public static IEnumerable<T> MyFind<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+        {
+            foreach (var item in source)
+            {
+                if (predicate.Invoke(item))
+                    yield return item;
+            }
+        }
+
+        public static IEnumerable<T> MyTake<T>(this IEnumerable<T> source, int count)
+        {
+            if (count > 0)
+            {
+                foreach (var item in source)
+                {
+                    yield return item;
+                    if (--count == 0) 
+                        break;
+                }
+            }
+        }
+
+        public static IEnumerable<IGrouping<TKey, TValue>> MyGroupBy<TKey, TValue>(this IEnumerable<TValue> source, Func<TValue, TKey> keySelector)
+        {
+            var dic = new Dictionary<TKey, Grouping<TKey, TValue>>();
+            foreach (var item in source)
+            {
+                var key = keySelector.Invoke(item);
+                if (!dic.TryGetValue(key, out var group))
+                {
+                    group = new Grouping<TKey, TValue> { Key = key };
+                    dic.Add(key, group);
+                }
+
+                group.Add(item);
+            }
+
+            return dic.Select(p => p.Value);
+        }
+
+        private class Grouping<TKey, TValue> : List<TValue>, IGrouping<TKey, TValue>
+        {
+            public TKey Key { get; set; }
         }
     }
 }
