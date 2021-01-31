@@ -5,6 +5,8 @@ namespace _010_Expressions
 {
     class Program
     {
+        //https://github.com/agileobjects/ReadableExpressions
+        //https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/expression-trees/debugging-expression-trees-in-visual-studio
         static void Main(string[] args)
         {
             var st = new Student { Name = "A1", Surname = "A1yan", Age = 15 };
