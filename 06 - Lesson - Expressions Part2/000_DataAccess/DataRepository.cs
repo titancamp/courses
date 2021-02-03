@@ -25,7 +25,8 @@ namespace _000_DataAccess
         public IEnumerable<IDataRecord> AsEnumerable(string query)
         {
             using var conn = new SqlConnection(_connectionString);
-            conn.Open();
+            if (conn.State != ConnectionState.Open)
+                conn.Open();
 
             using var comand = conn.CreateCommand();
             comand.CommandType = CommandType.Text;
