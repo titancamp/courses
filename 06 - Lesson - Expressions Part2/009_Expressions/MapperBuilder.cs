@@ -36,7 +36,8 @@ namespace _009_Expressions
             foreach (var item in members)
             {
                 var indexatorMemberExp = Expression.Call(par, miIndexator, Expression.Constant(item.Key, stringType));
-                var memberCastExp = Expression.Convert(indexatorMemberExp, item.Value.PropertyType);
+                var dbNullCheckExp = Expression.Call(typeof(Check).GetMethod(nameof(Check.ConvertDbNull)), indexatorMemberExp);
+                var memberCastExp = Expression.Convert(dbNullCheckExp, item.Value.PropertyType);
                 MemberAssignment memberAssignmentExp = Expression.Bind(members[item.Key], memberCastExp);
                 memberAssignments.Add(memberAssignmentExp);
             }
@@ -45,6 +46,16 @@ namespace _009_Expressions
             MemberInitExpression body = Expression.MemberInit(model, memberAssignments);
 
             return Expression.Lambda<Func<IDataRecord, TResult>>(body, par);
+        }
+
+        private static class Check
+        {
+            public static object ConvertDbNull(object obj)
+            {
+                if (obj is DBNull)
+                    return "";
+                return obj;
+            }
         }
     }
 }

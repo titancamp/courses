@@ -22,8 +22,8 @@ namespace _009_Expressions
             Func<IDataRecord, TModel> convert = _mapper.GetOrCreate<TModel>();
 
             var repo = new DataRepository(Connection.Default);
-            foreach (var blog in repo.Execute(query, convert))
-                yield return blog;
+            foreach (var model in repo.Execute(query, convert))
+                yield return model;
         }
     }
 }
