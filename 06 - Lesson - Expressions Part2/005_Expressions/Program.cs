@@ -12,7 +12,7 @@ namespace _005_Expressions
             var repo = new DataRepository(Connection.Default);
 
             var blogs = new List<Blog>();
-            foreach (var reader in repo.AsEnumerable("select * from Blog"))
+            foreach (var reader in repo.AsEnumerable("select * from Blogs"))
             {
                 var blog = new Blog
                 {

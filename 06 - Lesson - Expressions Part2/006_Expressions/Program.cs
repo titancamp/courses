@@ -19,7 +19,7 @@ namespace _006_Expressions
             var repo = new DataRepository(Connection.Default);
 
             var blogs = new List<Blog>();
-            foreach (Blog blog in repo.Execute("select * from Blog", convert))
+            foreach (Blog blog in repo.Execute("select * from Blogs", convert))
             {
                 blogs.Add(blog);
             }
