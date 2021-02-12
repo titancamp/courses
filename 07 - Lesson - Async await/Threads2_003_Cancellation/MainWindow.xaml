@@ -1,0 +1,16 @@
+﻿<Window x:Class="Threads2_003_Cancellation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Threads2_003_Cancellation"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TextBlock x:Name="MyTextBlock">Just started</TextBlock>
+        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button Click="ButtonBase_OnClick" Content="Cancel" Height="50" Width="100"/>
+            <Button Click="ButtonBasePool_OnClick" Content="Cancel Thread pool" Height="50" Width="100"/>    
+        </StackPanel>
+    </Grid>
+</Window>
