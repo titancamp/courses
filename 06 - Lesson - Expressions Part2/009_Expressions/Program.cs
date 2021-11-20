@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace _009_Expressions
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var sw = Stopwatch.StartNew();
 
@@ -33,9 +34,9 @@ namespace _009_Expressions
 
         static void Log(TimeSpan ts)
         {
-            string elapsedTime = string.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+            string elapsedTime = string.Format("{0:00}:{1:00}:{2:00}.{3:0000000}",
                 ts.Hours, ts.Minutes, ts.Seconds,
-                ts.Milliseconds / 10);
+                ts.Milliseconds);
             Console.WriteLine("RunTime " + elapsedTime);
         }
     }

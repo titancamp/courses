@@ -43,7 +43,8 @@ namespace _007_Expressions
             var par = Expression.Parameter(typeof(IDataRecord), "<r>");
 
             Type stringType = typeof(string);
-            var indexatorBlogIdExp = Expression.Call(par, indexatorMethod, Expression.Constant(nameof(Blog.BlogId), stringType));
+            var indexatorBlogIdExp = 
+                Expression.Call(par, indexatorMethod, Expression.Constant(nameof(Blog.BlogId), stringType));
             var indexatorUrlExp = Expression.Call(par, indexatorMethod, Expression.Constant(nameof(Blog.Url), stringType));
 
             var memberBlogIdExp = Expression.Convert(indexatorBlogIdExp, typeof(int));

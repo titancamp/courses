@@ -17,7 +17,8 @@ namespace _002_Expressions
             //cast
             var body = Expression.Convert(callExp, typeof(string));
 
-            Expression<Func<string, string>> testMethodExp = Expression.Lambda<Func<string, string>>(body, par);
+            Expression<Func<string, string>> testMethodExp = 
+                Expression.Lambda<Func<string, string>>(body, par);
 
             Func<string, string> testMethod = testMethodExp.Compile();
             string value = testMethod("test");
